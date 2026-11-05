@@ -72,6 +72,40 @@ test("ignora valores vacíos después de ':'", () => {
   assert.deepEqual(groups[0].players, []);
 });
 
+test('procesa el roster de World Boss ignorando roles y porcentajes', () => {
+  const example = readFileSync(new URL('../example_WB.txt', import.meta.url), 'utf8');
+  const groups = parseGroups(example);
+
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].name, 'PARTY 1');
+  assert.deepEqual(groups[0].players, [
+    'Naniyux',
+    'Vittini08',
+    'davidnotF',
+    'parlanchaa',
+    'brayan7893',
+    'AlexandeCA',
+    'IIDarkReaperII',
+    'IRagnarokl',
+    'IFurrys',
+    'AldebaranDTauru',
+  ]);
+});
+
+test("usa el último ':' y no el primero", () => {
+  const groups = parseGroups(
+    'PARTY 1 :\n1 Rol: Descripción: JugadorA\n:icono: (111) Rol: @[TAG] JugadorB',
+  );
+
+  assert.deepEqual(groups[0].players, ['JugadorA', 'JugadorB']);
+});
+
+test('ignora porcentajes y líneas de rol sin jugador', () => {
+  const groups = parseGroups('PARTY 1 :\nGuild: 50%\n1st Scout: 5%\n:oso: Scout 1 [NE]:');
+
+  assert.deepEqual(groups[0].players, []);
+});
+
 test('genera el string con el formato esperado', () => {
   const result = buildInviteString(['Jugador1', 'Jugador2']);
 

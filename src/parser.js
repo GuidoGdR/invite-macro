@@ -1,5 +1,8 @@
 const GROUP_HEADER = /^party\s*\d+\s*:/i;
 const TAG_PREFIX = /^@\[[^\]]*\]\s*/;
+const TAG_SEPARATOR = /^.*:\s*(@.*)$/;
+const VALUE_SEPARATOR = /^.*:\s*(.*)$/;
+const PERCENTAGE = /^\d+(?:[.,]\d+)?%$/;
 const NOISE_PREFIXES = ['tocá', 'toca', 'para salir', 'quien armó', 'quien armo'];
 
 function isNoiseLine(line) {
@@ -10,13 +13,13 @@ function isNoiseLine(line) {
 }
 
 function extractPlayer(line) {
-  const colon = line.indexOf(':');
-  if (colon === -1) return null;
+  const tagged = line.match(TAG_SEPARATOR);
+  const raw = tagged ? tagged[1] : (line.match(VALUE_SEPARATOR)?.[1] ?? '');
+  const player = raw.replace(TAG_PREFIX, '').trim();
 
-  const value = line.slice(colon + 1).trim();
-  const player = value.replace(TAG_PREFIX, '').trim();
+  if (!player || player.includes(':') || PERCENTAGE.test(player)) return null;
 
-  return player || null;
+  return player;
 }
 
 function normalizeGroupName(line) {

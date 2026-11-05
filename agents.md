@@ -37,8 +37,8 @@ There are currently no `format`, `lint`, or `typecheck` scripts. After changing 
 - A group starts with a header matching `/^party\s*\d+\s*:/i` (for example `PARTY 1 :`).
 - If there are no group headers, the whole input is treated as a single `PARTY 1` group.
 - Text before the first group header is ignored.
-- Inside a group, a player is extracted from the text after the first `:`.
-- Lines without `:` are ignored.
+- Inside a group, a player is extracted from the text after the last `: @` when the player is tagged, or after the last `:` otherwise.
+- Lines without `:` are ignored, as are empty values, percentages (for example `50%`), and values that still contain `:`.
 - Footer/noise lines are ignored (lines containing `«`/`»`, or starting with known footer text).
 - The `@[TAG]` prefix is removed from player names; duplicates and original order are preserved.
 - Each player generates:
