@@ -30,6 +30,8 @@ There are currently no `format`, `lint`, or `typecheck` scripts. After changing 
 - `src/parser.js` — Pure roster parsing and invite-string generation.
 - `src/parser.test.js` — Tests for the parser and output format.
 - `src/style.css` — Global styles and CSS variables.
+- `vite.config.js` — Vite configuration; sets `base: '/invite-macro/'` to match the GitHub Pages subpath.
+- `.github/workflows/deploy.yml` — CI/CD: runs tests and build, then deploys `dist/` to GitHub Pages on every push to `master`.
 - `dist/` — Generated build output (ignored by Git).
 - `.opencode/` — Local agent skills/configuration.
 
