@@ -1,6 +1,13 @@
 import './style.css';
 import exampleRoster from '../example_CTA.txt?raw';
-import { DEFAULT_WAIT_MS, buildInviteString, parseGroups } from './parser.js';
+import {
+  DEFAULT_CUSTOM_TEMPLATE,
+  DEFAULT_WAIT_MS,
+  PLAYER_TOKEN,
+  buildCustomInviteString,
+  buildInviteString,
+  parseGroups,
+} from './parser.js';
 
 const rosterInput = document.querySelector('#roster');
 const generateButton = document.querySelector('#generate');
@@ -14,9 +21,14 @@ const cancelSettingsButton = document.querySelector('#cancel-settings');
 const settingsForm = document.querySelector('#settings-form');
 const waitMsInput = document.querySelector('#wait-ms');
 const waitMsError = document.querySelector('#wait-ms-error');
+const customOutputCheckbox = document.querySelector('#custom-output');
+const customOutputInput = document.querySelector('#custom-output-template');
+const customOutputError = document.querySelector('#custom-output-error');
 
 let renderedGroups = [];
 let waitMs = DEFAULT_WAIT_MS;
+let useCustomOutput = false;
+let customOutputTemplate = DEFAULT_CUSTOM_TEMPLATE;
 let hasGenerated = false;
 
 function copyWithFallback(text) {
@@ -50,6 +62,19 @@ function showWaitMsError(message) {
   waitMsError.hidden = false;
   waitMsInput.setAttribute('aria-invalid', 'true');
   waitMsInput.focus();
+}
+
+function clearCustomOutputError() {
+  customOutputError.hidden = true;
+  customOutputError.textContent = '';
+  customOutputInput.removeAttribute('aria-invalid');
+}
+
+function showCustomOutputError(message) {
+  customOutputError.textContent = message;
+  customOutputError.hidden = false;
+  customOutputInput.setAttribute('aria-invalid', 'true');
+  customOutputInput.focus();
 }
 
 function createGroupCard(group, inviteString) {
@@ -105,7 +130,9 @@ function renderGroups(groups) {
   results.replaceChildren();
   renderedGroups = groups.map((group) => ({
     name: group.name,
-    text: buildInviteString(group.players, waitMs),
+    text: useCustomOutput
+      ? buildCustomInviteString(group.players, customOutputTemplate)
+      : buildInviteString(group.players, waitMs),
     players: group.players,
   }));
   hasGenerated = true;
@@ -138,17 +165,36 @@ function generate() {
 }
 
 function applySettings() {
-  const raw = waitMsInput.value.trim();
-  const value = Number(raw);
+  const customTemplate = customOutputInput.value.trim();
+  const wantsCustomOutput = customOutputCheckbox.checked;
+  let value = waitMs;
 
-  if (!/^\d+$/.test(raw) || !Number.isSafeInteger(value)) {
-    showWaitMsError('Ingresá un número entero válido mayor o igual a 0.');
+  if (!wantsCustomOutput) {
+    const raw = waitMsInput.value.trim();
+    value = Number(raw);
+
+    if (!/^\d+$/.test(raw) || !Number.isSafeInteger(value)) {
+      showWaitMsError('Ingresá un número entero válido mayor o igual a 0.');
+      return;
+    }
+  }
+
+  if (wantsCustomOutput && !customTemplate) {
+    showCustomOutputError('Escribí una plantilla para la salida personalizada.');
+    return;
+  }
+
+  if (wantsCustomOutput && !customTemplate.includes(PLAYER_TOKEN)) {
+    showCustomOutputError(`La plantilla debe incluir ${PLAYER_TOKEN} para el nombre del jugador.`);
     return;
   }
 
   waitMs = value;
+  useCustomOutput = wantsCustomOutput;
+  customOutputTemplate = customTemplate || DEFAULT_CUSTOM_TEMPLATE;
   settingsDialog.close();
   clearWaitMsError();
+  clearCustomOutputError();
 
   if (hasGenerated) generate();
 }
@@ -169,16 +215,41 @@ loadExampleButton.addEventListener('click', () => {
 
 openSettingsButton.addEventListener('click', () => {
   waitMsInput.value = String(waitMs);
+  waitMsInput.disabled = useCustomOutput;
+  customOutputCheckbox.checked = useCustomOutput;
+  customOutputInput.value = customOutputTemplate;
+  customOutputInput.disabled = !useCustomOutput;
   clearWaitMsError();
+  clearCustomOutputError();
   settingsDialog.showModal();
-  waitMsInput.focus();
-  waitMsInput.select();
+
+  if (useCustomOutput) {
+    customOutputInput.focus();
+    customOutputInput.select();
+  } else {
+    waitMsInput.focus();
+    waitMsInput.select();
+  }
 });
 
 closeSettingsButton.addEventListener('click', () => settingsDialog.close());
 cancelSettingsButton.addEventListener('click', () => settingsDialog.close());
 
 waitMsInput.addEventListener('input', clearWaitMsError);
+customOutputInput.addEventListener('input', clearCustomOutputError);
+
+customOutputCheckbox.addEventListener('change', () => {
+  const enabled = customOutputCheckbox.checked;
+  customOutputInput.disabled = !enabled;
+  waitMsInput.disabled = enabled;
+  clearCustomOutputError();
+
+  if (enabled) {
+    clearWaitMsError();
+    customOutputInput.focus();
+    customOutputInput.select();
+  }
+});
 
 settingsForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -189,4 +260,7 @@ settingsDialog.addEventListener('click', (event) => {
   if (event.target === settingsDialog) settingsDialog.close();
 });
 
-settingsDialog.addEventListener('close', clearWaitMsError);
+settingsDialog.addEventListener('close', () => {
+  clearWaitMsError();
+  clearCustomOutputError();
+});

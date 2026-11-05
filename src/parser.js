@@ -64,6 +64,10 @@ export function parseGroups(text) {
 
 export const DEFAULT_WAIT_MS = 500;
 
+export const PLAYER_TOKEN = '{player}';
+
+export const DEFAULT_CUSTOM_TEMPLATE = `{WAITMS500}{RETURN}{WAITMS500}/invite ${PLAYER_TOKEN}{WAITMS500}{RETURN}`;
+
 function buildWaitToken(waitMs) {
   return waitMs > 0 ? `{WAITMS${waitMs}}` : '';
 }
@@ -74,4 +78,8 @@ export function buildInviteString(players, waitMs = DEFAULT_WAIT_MS) {
   return players
     .map((player) => `${wait}{RETURN}${wait}/invite ${player}${wait}{RETURN}`)
     .join('');
+}
+
+export function buildCustomInviteString(players, template = DEFAULT_CUSTOM_TEMPLATE) {
+  return players.map((player) => template.split(PLAYER_TOKEN).join(player)).join('');
 }

@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { buildInviteString, parseGroups } from './parser.js';
+import {
+  DEFAULT_CUSTOM_TEMPLATE,
+  buildCustomInviteString,
+  buildInviteString,
+  parseGroups,
+} from './parser.js';
 
 test('parsea los grupos del ejemplo y quita el tag de los jugadores', () => {
   const example = readFileSync(new URL('../example_CTA.txt', import.meta.url), 'utf8');
@@ -125,4 +130,42 @@ test('omite los WAITMS cuando el valor es 0', () => {
   const result = buildInviteString(['Jugador1', 'Jugador2'], 0);
 
   assert.equal(result, '{RETURN}/invite Jugador1{RETURN}{RETURN}/invite Jugador2{RETURN}');
+});
+
+test('genera la salida personalizada por defecto por cada jugador', () => {
+  const result = buildCustomInviteString(['Jugador1', 'Jugador2']);
+
+  assert.equal(
+    result,
+    '{WAITMS500}{RETURN}{WAITMS500}/invite Jugador1{WAITMS500}{RETURN}{WAITMS500}{RETURN}{WAITMS500}/invite Jugador2{WAITMS500}{RETURN}',
+  );
+});
+
+test('la plantilla personalizada por defecto usa {player}', () => {
+  assert.equal(
+    DEFAULT_CUSTOM_TEMPLATE,
+    '{WAITMS500}{RETURN}{WAITMS500}/invite {player}{WAITMS500}{RETURN}',
+  );
+});
+
+test('reemplaza todas las apariciones de {player} en la plantilla', () => {
+  const result = buildCustomInviteString(['JugadorA'], '/invite {player}{RETURN}{player}');
+
+  assert.equal(result, '/invite JugadorA{RETURN}JugadorA');
+});
+
+test('no interpreta caracteres especiales de reemplazo en el nombre', () => {
+  const result = buildCustomInviteString(['$&'], '{player}');
+
+  assert.equal(result, '$&');
+});
+
+test('respeta los WAITMS escritos literalmente en la plantilla', () => {
+  const result = buildCustomInviteString(['JugadorA'], '{WAITMS250}/invite {player}');
+
+  assert.equal(result, '{WAITMS250}/invite JugadorA');
+});
+
+test('devuelve una cadena vacía sin jugadores', () => {
+  assert.equal(buildCustomInviteString([], DEFAULT_CUSTOM_TEMPLATE), '');
 });

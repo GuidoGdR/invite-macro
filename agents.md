@@ -48,6 +48,10 @@ There are currently no `format`, `lint`, or `typecheck` scripts. After changing 
 - If the configured wait is 0, the `{WAITMS...}` tokens are omitted:
   `{RETURN}/invite NOMBRE{RETURN}`
 - The wait is configured from the **Opciones** dialog above the roster and lives only in memory, so it resets to 500 on reload.
+- **Salida personalizada** (custom output) is an opt-in checkbox in **Opciones**. When enabled, each player's command comes from the template in the text input, repeated once per player. The `{player}` token is replaced by the player name (all occurrences).
+- The default custom template is `{WAITMS500}{RETURN}{WAITMS500}/invite {player}{WAITMS500}{RETURN}`. Its `{WAITMS...}` tokens are literal text and do not follow the configured wait.
+- The custom output settings live only in memory and are committed with **Aplicar**; **Cancelar** discards them.
+- While custom output is enabled, the WAITMS input is disabled and its value is ignored.
 - The exact macro format must not change unless explicitly requested.
 
 ## Architecture
@@ -58,14 +62,14 @@ Keep the code simple and separated by responsibility:
 - `style.css` — Presentation only, using the existing CSS variables.
 
 Execution flow:
-1. Optionally, the user opens **Opciones** and sets the WAITMS in milliseconds.
+1. Optionally, the user opens **Opciones** and sets the WAITMS in milliseconds and/or enables **Salida personalizada** with a template.
 2. The user pastes a roster and clicks **Generar** (or presses Ctrl/Cmd+Enter).
 3. `parseGroups()` returns `[{ name, players }]`.
-4. `buildInviteString(players, waitMs)` builds the macro string for each group.
+4. `buildInviteString(players, waitMs)` builds the standard macro string for each group, or `buildCustomInviteString(players, template)` when custom output is enabled.
 5. `main.js` renders one card per group with a readonly output and a copy button.
 6. The copy button writes only that group's string to the clipboard.
 
-There is no global state library. The UI state is `renderedGroups`, `waitMs`, and `hasGenerated` inside `main.js`.
+There is no global state library. The UI state is `renderedGroups`, `waitMs`, `useCustomOutput`, `customOutputTemplate`, and `hasGenerated` inside `main.js`.
 
 ## Conventions
 - Code, identifiers, and code comments are written in English. User-facing UI text is in Spanish.

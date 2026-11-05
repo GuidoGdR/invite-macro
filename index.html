@@ -64,9 +64,31 @@
               aria-describedby="wait-ms-hint wait-ms-error"
             />
             <p id="wait-ms-hint" class="field-hint">
-              Espera en milisegundos antes de cada acción. Con 0 se omiten los {WAITMS...}.
+              Espera en milisegundos antes de cada acción. Con 0 se omiten los {WAITMS...}. Se
+              ignora con la salida personalizada activa.
             </p>
             <p id="wait-ms-error" class="field-error" role="alert" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="checkbox-field" for="custom-output">
+              <input id="custom-output" type="checkbox" />
+              <span>Salida personalizada</span>
+            </label>
+            <input
+              id="custom-output-template"
+              class="field-input template-input"
+              type="text"
+              value="{WAITMS500}{RETURN}{WAITMS500}/invite {player}{WAITMS500}{RETURN}"
+              spellcheck="false"
+              disabled
+              aria-describedby="custom-output-hint custom-output-error"
+            />
+            <p id="custom-output-hint" class="field-hint">
+              Se repite una vez por jugador. Usá {player} donde va el nombre; los {WAITMS...} se
+              usan tal cual.
+            </p>
+            <p id="custom-output-error" class="field-error" role="alert" hidden></p>
           </div>
 
           <footer class="dialog-actions">
