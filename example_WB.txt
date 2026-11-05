@@ -9,16 +9,16 @@ Caller: 30%
 3rd Scout: 5%
 4th Scout: 5%
 ---------------------
-:monarca: (111) Main Tank: @[THR] Naniyux
-:incubo: (222) Off Tank: @[THR] Vittini08
-:Santificador: (333) Healer: @[THR] davidnotF
-:sc: (444) Shamocaller: @[THR] parlanchaa
-:martillo: (555 / 888) Truebolt hammer: @[THR] brayan7893
-:falce: (666) Royal jacket + guardian helmet: @[GRIM] AlexandeCA
-:falce: (677) Knight helmet + hellion jacket: @[THR] IIDarkReaperII
-:falce: (677) Knight helmet + hellion jacket: @[THR] IRagnarokl
-:falce: (688) Helmet of valor + hellion jacket: @[THR] IFurrys
-:Juradores: (777) juraore: @[THR] AldebaranDTauru
+:monarca: (111) Main Tank: @[THR] Nandiyux
+:incubo: (222) Off Tank: @[THR] Vettini08
+:Santificador: (333) Healer: @[THR] danielnotF
+:sc: (444) Shamocaller: @[THR] charlatanX
+:martillo: (555 / 888) Truebolt hammer: @[THR] Steelbolt7893
+:falce: (666) Royal jacket + guardian helmet: @[GRIM] AvalonCA
+:falce: (677) Knight helmet + hellion jacket: @[THR] IIFrostEchoII
+:falce: (677) Knight helmet + hellion jacket: @[THR] IRunebladel
+:falce: (688) Helmet of valor + hellion jacket: @[THR] IStormy
+:Juradores: (777) juraore: @[THR] AlcyoneDVega
 
 :oso: Scout 1 [NE]:
 :oso: Scout 2 [SE]:

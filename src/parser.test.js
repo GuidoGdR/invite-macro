@@ -10,12 +10,12 @@ test('parsea los grupos del ejemplo y quita el tag de los jugadores', () => {
   assert.equal(groups.length, 2);
   assert.equal(groups[0].name, 'PARTY 1');
   assert.equal(groups[0].players.length, 20);
-  assert.equal(groups[0].players[0], '@! El Sujeto');
-  assert.equal(groups[0].players[7], 'NAHZ');
+  assert.equal(groups[0].players[0], '@! El Demo');
+  assert.equal(groups[0].players[7], 'VOIDZ');
   assert.equal(groups[1].name, 'PARTY 2');
   assert.equal(groups[1].players.length, 20);
-  assert.equal(groups[1].players[0], 'xMateoDavidx');
-  assert.equal(groups[1].players[19], '@!NoSoyElisea (uemura Fruna)');
+  assert.equal(groups[1].players[0], 'xRyzeAlexx');
+  assert.equal(groups[1].players[19], '@!NoSoyNadie (alias Demo)');
 });
 
 test('detecta encabezados sin importar mayúsculas ni espacios', () => {
@@ -79,16 +79,16 @@ test('procesa el roster de World Boss ignorando roles y porcentajes', () => {
   assert.equal(groups.length, 1);
   assert.equal(groups[0].name, 'PARTY 1');
   assert.deepEqual(groups[0].players, [
-    'Naniyux',
-    'Vittini08',
-    'davidnotF',
-    'parlanchaa',
-    'brayan7893',
-    'AlexandeCA',
-    'IIDarkReaperII',
-    'IRagnarokl',
-    'IFurrys',
-    'AldebaranDTauru',
+    'Nandiyux',
+    'Vettini08',
+    'danielnotF',
+    'charlatanX',
+    'Steelbolt7893',
+    'AvalonCA',
+    'IIFrostEchoII',
+    'IRunebladel',
+    'IStormy',
+    'AlcyoneDVega',
   ]);
 });
 

@@ -1,47 +1,47 @@
 ⚔️ Composición PvP
 PARTY 1 :
-1 Caller: @! El Sujeto
-2 Martillo Largo: @[THR] Theroy26
-3 Gran Arcano: @[THR] llARENASll
-4 Arcano 1H: @[THR] IIDarkReaperII
-5 Puas: @[THR] Yocastro2001
-6 Prisma: @[THR] THCplayer
-7 Cancion: @[THR] JulianChoHop
-8 Arco Largo: @[THR] NAHZ
-9 Arco Largo: @[THR] BIRRO3
-10 Pasillo: @[THR] nsevenxs
-11 Juradores: @[THR] WhoIsAzuraxx
-12 Juradores: @[THR] PEPITOGRILL9
-13 Locus (Defensivo): @[THR] Resgor
-14 Lifecurse: @[THR] LStardustL
-15 Romperreinos: @[THR] Vking9
-16 Cazaespiritus: @[THR] Fleterosk2
-17 Santificador: @[THR] LuooRuggia
-18 Santificador: @[THR] J0hnnieW4lker
-19 Exaltado: @[THR] AldebaranDTauru
-20 Desenfrenado: @[THR] Byronbf
+1 Caller: @! El Demo
+2 Martillo Largo: @[THR] Ashvale26
+3 Gran Arcano: @[THR] llNebulaXll
+4 Arcano 1H: @[THR] IIFrostEchoII
+5 Puas: @[THR] Kaelor2001
+6 Prisma: @[THR] BytePlayer
+7 Cancion: @[THR] RivenHop
+8 Arco Largo: @[THR] VOIDZ
+9 Arco Largo: @[THR] VIRGO3
+10 Pasillo: @[THR] nTwelvexs
+11 Juradores: @[THR] WhoIsNymbrax
+12 Juradores: @[THR] PIPERGRID9
+13 Locus (Defensivo): @[THR] Meldor
+14 Lifecurse: @[THR] LStarfrostL
+15 Romperreinos: @[THR] Wking9
+16 Cazaespiritus: @[THR] Trapperk2
+17 Santificador: @[THR] LuooValdria
+18 Santificador: @[THR] J0hnD03
+19 Exaltado: @[THR] AlcyoneDVega
+20 Desenfrenado: @[THR] Baronbf
 
 PARTY 2 :
-21 Torre De Mana: @[THR] xMateoDavidx
-22 Carambano: @[THR] sebasdevil
-23 Baston de Equilibrio: @[THR] ofnebulus
-24 Arcano 1H: @[THR] Caxas3009
-25 Martillo 1H/Maza Pesada: @[THR] JUANFUEGOO
-26 Arco Largo: @[THR] YangKaiiii
-27 Arco Largo: @[THR] XxZk1xX
-28 Arco Largo: @[THR] BlueZ53
-29 Arco Largo: @[THR] ZaitXs
-30 Arco Largo: @[THR] melabesa
-31 Damnation: @[THR] Jonasin
-32 Juradores: @[THR] GBfernandao
-33 Juradores: @[THR] MaxGam3rX
-34 Incubo: @[THR] parlanchaa
-35 Putrefacto: @[THR] desayunofarming1
-36 Locus(Ofensivo): @[THR] zFermi
-37 Santificador: @[THR] hichiro22
-38 Santificador: @[THR] Laricapo
-39 Santificador/Caido: @[THR] PacManP12
-40 Natural 1H: @!NoSoyElisea (uemura Fruna)
+21 Torre De Mana: @[THR] xRyzeAlexx
+22 Carambano: @[THR] umbrademon
+23 Baston de Equilibrio: @[THR] ofumbra
+24 Arcano 1H: @[THR] Kaxas3009
+25 Martillo 1H/Maza Pesada: @[THR] ORIONFUEGOO
+26 Arco Largo: @[THR] YinKaiiii
+27 Arco Largo: @[THR] XxQv1xX
+28 Arco Largo: @[THR] GreZ53
+29 Arco Largo: @[THR] ZairXs
+30 Arco Largo: @[THR] meladuna
+31 Damnation: @[THR] JonasX
+32 Juradores: @[THR] GBferraz
+33 Juradores: @[THR] NexGam3rX
+34 Incubo: @[THR] charlatanX
+35 Putrefacto: @[THR] cenafarming1
+36 Locus(Ofensivo): @[THR] zQuasar
+37 Santificador: @[THR] hokuto22
+38 Santificador: @[THR] Larimanto
+39 Santificador/Caido: @[THR] PacMoleP12
+40 Natural 1H: @!NoSoyNadie (alias Demo)
 Tocá «Anotarme» y escribí el número del rol
 Para salir: botón «Salir»
 Quien armó este roster (o un rol autorizado) anota o quita a otros con «Gestionar»
