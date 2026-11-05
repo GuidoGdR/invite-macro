@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Genera comandos /invite de Albion Online agrupados por party." />
+    <title>CTA Invite</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>CTA Invite</h1>
+        <p>Pegá el roster y generá un botón de copiado por cada party.</p>
+      </header>
+
+      <section class="input-panel">
+        <label class="field-label" for="roster">Roster</label>
+        <textarea
+          id="roster"
+          class="roster-input"
+          spellcheck="false"
+          placeholder="Pegá acá el roster con encabezados PARTY 1 :, PARTY 2 :, etc."
+        ></textarea>
+
+        <div class="actions">
+          <button id="generate" class="btn btn-primary" type="button">Generar</button>
+          <button id="load-example" class="btn btn-secondary" type="button">Cargar ejemplo</button>
+        </div>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="results" class="results" aria-live="polite"></section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
