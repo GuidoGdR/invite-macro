@@ -14,7 +14,19 @@
       </header>
 
       <section class="input-panel">
-        <label class="field-label" for="roster">Roster</label>
+        <div class="input-header">
+          <label class="field-label" for="roster">Roster</label>
+          <button
+            id="open-settings"
+            class="btn btn-secondary btn-compact"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="settings-dialog"
+          >
+            Opciones
+          </button>
+        </div>
+
         <textarea
           id="roster"
           class="roster-input"
@@ -29,6 +41,40 @@
 
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </section>
+
+      <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
+        <form id="settings-form" class="settings-form" novalidate>
+          <header class="dialog-header">
+            <h2 id="settings-title">Opciones de generación</h2>
+            <button id="close-settings" class="icon-button" type="button" aria-label="Cerrar opciones">
+              ×
+            </button>
+          </header>
+
+          <div class="field">
+            <label class="field-label" for="wait-ms">WAITMS (ms)</label>
+            <input
+              id="wait-ms"
+              class="field-input"
+              type="number"
+              min="0"
+              step="1"
+              inputmode="numeric"
+              value="500"
+              aria-describedby="wait-ms-hint wait-ms-error"
+            />
+            <p id="wait-ms-hint" class="field-hint">
+              Espera en milisegundos antes de cada acción. Con 0 se omiten los {WAITMS...}.
+            </p>
+            <p id="wait-ms-error" class="field-error" role="alert" hidden></p>
+          </div>
+
+          <footer class="dialog-actions">
+            <button id="cancel-settings" class="btn btn-secondary" type="button">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Aplicar</button>
+          </footer>
+        </form>
+      </dialog>
 
       <section id="results" class="results" aria-live="polite"></section>
     </main>

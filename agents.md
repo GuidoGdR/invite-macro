@@ -26,7 +26,7 @@ There are currently no `format`, `lint`, or `typecheck` scripts. After changing 
 - `index.html` — App shell and static UI structure.
 - `example_CTA.txt` — CTA roster used by the "Cargar ejemplo" button and tests.
 - `example_WB.txt` — World Boss roster kept as a reference input.
-- `src/main.js` — Entry point: DOM events, rendering, clipboard behavior.
+- `src/main.js` — Entry point: DOM events, settings dialog, rendering, clipboard behavior.
 - `src/parser.js` — Pure roster parsing and invite-string generation.
 - `src/parser.test.js` — Tests for the parser and output format.
 - `src/style.css` — Global styles and CSS variables.
@@ -43,8 +43,11 @@ There are currently no `format`, `lint`, or `typecheck` scripts. After changing 
 - Lines without `:` are ignored, as are empty values, percentages (for example `50%`), and values that still contain `:`.
 - Footer/noise lines are ignored (lines containing `«`/`»`, or starting with known footer text).
 - The `@[TAG]` prefix is removed from player names; duplicates and original order are preserved.
-- Each player generates:
-  `{WAITMS100}{RETURN}{WAITMS100}/invite NOMBRE{WAITMS100}{RETURN}`
+- Each player generates, using the configured wait (500 ms by default):
+  `{WAITMS500}{RETURN}{WAITMS500}/invite NOMBRE{WAITMS500}{RETURN}`
+- If the configured wait is 0, the `{WAITMS...}` tokens are omitted:
+  `{RETURN}/invite NOMBRE{RETURN}`
+- The wait is configured from the **Opciones** dialog above the roster and lives only in memory, so it resets to 500 on reload.
 - The exact macro format must not change unless explicitly requested.
 
 ## Architecture
@@ -55,13 +58,14 @@ Keep the code simple and separated by responsibility:
 - `style.css` — Presentation only, using the existing CSS variables.
 
 Execution flow:
-1. The user pastes a roster and clicks **Generar** (or presses Ctrl/Cmd+Enter).
-2. `parseGroups()` returns `[{ name, players }]`.
-3. `buildInviteString()` builds the macro string for each group.
-4. `main.js` renders one card per group with a readonly output and a copy button.
-5. The copy button writes only that group's string to the clipboard.
+1. Optionally, the user opens **Opciones** and sets the WAITMS in milliseconds.
+2. The user pastes a roster and clicks **Generar** (or presses Ctrl/Cmd+Enter).
+3. `parseGroups()` returns `[{ name, players }]`.
+4. `buildInviteString(players, waitMs)` builds the macro string for each group.
+5. `main.js` renders one card per group with a readonly output and a copy button.
+6. The copy button writes only that group's string to the clipboard.
 
-There is no global state library. The only UI state is `renderedGroups` inside `main.js`.
+There is no global state library. The UI state is `renderedGroups`, `waitMs`, and `hasGenerated` inside `main.js`.
 
 ## Conventions
 - Code, identifiers, and code comments are written in English. User-facing UI text is in Spanish.

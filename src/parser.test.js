@@ -106,11 +106,23 @@ test('ignora porcentajes y líneas de rol sin jugador', () => {
   assert.deepEqual(groups[0].players, []);
 });
 
-test('genera el string con el formato esperado', () => {
+test('genera el string con el WAITMS predeterminado', () => {
   const result = buildInviteString(['Jugador1', 'Jugador2']);
 
   assert.equal(
     result,
-    '{WAITMS100}{RETURN}{WAITMS100}/invite Jugador1{WAITMS100}{RETURN}{WAITMS100}{RETURN}{WAITMS100}/invite Jugador2{WAITMS100}{RETURN}',
+    '{WAITMS500}{RETURN}{WAITMS500}/invite Jugador1{WAITMS500}{RETURN}{WAITMS500}{RETURN}{WAITMS500}/invite Jugador2{WAITMS500}{RETURN}',
   );
+});
+
+test('permite personalizar el WAITMS', () => {
+  const result = buildInviteString(['Jugador1'], 250);
+
+  assert.equal(result, '{WAITMS250}{RETURN}{WAITMS250}/invite Jugador1{WAITMS250}{RETURN}');
+});
+
+test('omite los WAITMS cuando el valor es 0', () => {
+  const result = buildInviteString(['Jugador1', 'Jugador2'], 0);
+
+  assert.equal(result, '{RETURN}/invite Jugador1{RETURN}{RETURN}/invite Jugador2{RETURN}');
 });

@@ -62,8 +62,16 @@ export function parseGroups(text) {
   return groups;
 }
 
-export function buildInviteString(players) {
+export const DEFAULT_WAIT_MS = 500;
+
+function buildWaitToken(waitMs) {
+  return waitMs > 0 ? `{WAITMS${waitMs}}` : '';
+}
+
+export function buildInviteString(players, waitMs = DEFAULT_WAIT_MS) {
+  const wait = buildWaitToken(waitMs);
+
   return players
-    .map((player) => `{WAITMS100}{RETURN}{WAITMS100}/invite ${player}{WAITMS100}{RETURN}`)
+    .map((player) => `${wait}{RETURN}${wait}/invite ${player}${wait}{RETURN}`)
     .join('');
 }
